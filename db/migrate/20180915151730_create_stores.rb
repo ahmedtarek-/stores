@@ -5,7 +5,7 @@ class CreateStores < ActiveRecord::Migration
       t.string :city,    null: false
       t.string :street,  null: false
 
-      t.integer :spaces_counts, default: 0
+      t.integer :spaces_count, default: 0
       
       t.timestamps null: false
     end

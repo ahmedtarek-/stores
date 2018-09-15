@@ -31,12 +31,12 @@ ActiveRecord::Schema.define(version: 20180915151925) do
   add_index "spaces", ["store_id"], name: "index_spaces_on_store_id", using: :btree
 
   create_table "stores", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "title",         limit: 100,             null: false
-    t.string   "city",                                  null: false
-    t.string   "street",                                null: false
-    t.integer  "spaces_counts",             default: 0
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.string   "title",        limit: 100,             null: false
+    t.string   "city",                                 null: false
+    t.string   "street",                               null: false
+    t.integer  "spaces_count",             default: 0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   add_foreign_key "spaces", "stores"
