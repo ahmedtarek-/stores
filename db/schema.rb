@@ -11,11 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180915151730) do
+ActiveRecord::Schema.define(version: 20180915151925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "spaces", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "title",           limit: 100, null: false
+    t.float    "size",                        null: false
+    t.float    "price_per_day",               null: false
+    t.float    "price_per_week",              null: false
+    t.float    "price_per_month",             null: false
+    t.uuid     "store_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "spaces", ["store_id"], name: "index_spaces_on_store_id", using: :btree
 
   create_table "stores", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "title",         limit: 100,             null: false
@@ -26,4 +39,5 @@ ActiveRecord::Schema.define(version: 20180915151730) do
     t.datetime "updated_at",                            null: false
   end
 
+  add_foreign_key "spaces", "stores"
 end
