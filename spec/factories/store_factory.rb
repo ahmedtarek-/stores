@@ -13,7 +13,7 @@ module StoreFactory
   def self.create_stores(count, explicit_params={})
     stores = []
     1.upto(count) do |n|
-      Store.create(store_params(explicit_params))
+      stores << Store.create(store_params(explicit_params))
     end
     stores
   end

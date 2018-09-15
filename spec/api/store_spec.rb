@@ -16,15 +16,14 @@ RSpec.describe 'Store API' do
     end
 
     it 'returns stores matching filtered title' do
-      non_matching_stores = StoreFactory.create_stores(2)
-      matching_stores     = StoreFactory.create_stores(1, { title: "Yamaha" })
+      non_matching_stores_ids = StoreFactory.create_stores(2).map(&:id)
+      matching_stores_ids     = StoreFactory.create_stores(1, { title: "Yamaha" }).map(&:id)
 
       get '/stores', { title: "eq:Yamaha" }
       stores_ids = JSON.parse(response.body)['stores'].map { |s| s['id'] }
 
       expect(stores_ids.size).to eq(1)
-      expect(stores_ids).to include(matching_stores)
-      expect(stores_ids).to_not include(non_matching_stores)
+      expect(stores_ids).to eq(matching_stores_ids)
     end
 
   end
