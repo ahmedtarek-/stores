@@ -44,18 +44,19 @@ RSpec.describe 'Space API' do
 
   describe 'PUT /spaces/:id' do
     it 'updates store' do
-      store = SpaceFactory.create_spaces(1).first
+      space = SpaceFactory.create_spaces(1).first
       
       params = {
-        title:  "New Store",
-        street: "Clockwork 12"
+        title:  "New Space",
+        price_per_day: 99.99,
+        size: 344.5
       }
 
-      put "/spaces/#{store.id}", { store: params }
+      put "/spaces/#{space.id}", { space: params }
       
-      store = Space.find(store.id)
+      space = Space.find(space.id)
       params.keys.each do |key|
-        expect(store.attributes[key.to_s]).to eq params[key]
+        expect(space.attributes[key.to_s]).to eq params[key]
       end
     end
   end

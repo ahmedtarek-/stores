@@ -14,7 +14,15 @@ class SpacesController < ApplicationController
     if @space.save
       render :show, status: :ok
     else
-      render json: { errors: { store: @space.errors }}, status: :unprocessable_entity
+      render json: { errors: { space: @space.errors }}, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @space.update(space_create_params)
+      render :show, status: :ok
+    else
+      render json: { errors: { space: @space.errors }}, status: :unprocessable_entity
     end
   end
 
