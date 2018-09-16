@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'factories/space_factory'
+require 'factories/store_factory'
 
 RSpec.describe 'Space API' do
   describe 'GET /spaces' do
@@ -59,6 +60,23 @@ RSpec.describe 'Space API' do
         price_per_month: 3000
       }
       expect { post '/spaces', { space: params } }.to change(Space, :count).from(0).to(1)
+    end
+
+    it 'updates spaces_count for associated store' do
+      store = StoreFactory.create_stores(1).first
+      
+      params = {
+        title: "New Space",
+        size: 300,
+        price_per_day: 100,
+        price_per_week: 700,
+        price_per_month: 3000,
+        store_id: store.id
+      }
+
+      post '/spaces', { space: params }
+      store = Store.find(store.id)
+      expect(store.spaces_count).to eq(1)
     end
   end
 

@@ -1,6 +1,12 @@
 class Space < ActiveRecord::Base
   belongs_to :store, counter_cache: true
 
+  validates :title, presence: true
+  validates :size, presence: true
+  validates :price_per_day,  presence: true
+  validates :price_per_week,  presence: true
+  validates :price_per_month,  presence: true
+
   def calculate_price(start_date, end_date)
     return unless start_date.present? && end_date.present?
     
