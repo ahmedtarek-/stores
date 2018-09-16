@@ -25,6 +25,16 @@ RSpec.describe 'Store API' do
       expect(stores_ids.size).to eq(matching_stores_ids.size)
       expect(stores_ids).to eq(matching_stores_ids)
     end
+  end
 
+  describe 'POST /stores' do
+    it 'creates new stores' do
+      params = {
+        title: "New Store",
+        city: "New Delhi",
+        street: "Clockwork 12"
+      }
+      expect { post '/stores', { store: params } }.to change(Store, :count).by(1)
+    end
   end
 end
