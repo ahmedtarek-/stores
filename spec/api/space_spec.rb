@@ -29,6 +29,26 @@ RSpec.describe 'Space API' do
     end
   end
 
+  describe 'GET /spaces/:id/price/:start_date/:end_date' do
+    it 'returns correct price' do
+      params = {
+        price_per_day: 100,
+        price_per_week: 500,
+        price_per_month: 1000
+      }
+      space = SpaceFactory.create_spaces(1, params).first
+
+      # 1 month, 2 weeks and 4 days
+      start_date = Time.now
+      end_date = start_date + 48.days
+      expected_price = 2400
+
+      get "/spaces/#{space.id}/price/#{start_date.to_i}/#{end_date.to_i}"
+      json = JSON.parse(response.body)
+      expect (json['price']).to eq(expected_price)
+    end
+  end
+
   describe 'POST /spaces' do
     it 'creates new space - when given valid params' do
       params = {
