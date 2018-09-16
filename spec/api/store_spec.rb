@@ -27,7 +27,7 @@ RSpec.describe 'Store API' do
     end
   end
 
-  describe 'GET /store' do
+  describe 'GET /stores/:id' do
     it 'returns correct store' do
       store_id = StoreFactory.create_stores(1).first.id
       
@@ -50,7 +50,7 @@ RSpec.describe 'Store API' do
     end
   end
 
-  describe 'PUT /store' do
+  describe 'PUT /stores/:id' do
     it 'updates store' do
       store = StoreFactory.create_stores(1).first
       
@@ -68,7 +68,7 @@ RSpec.describe 'Store API' do
     end
   end
 
-  describe 'DELETE /store' do
+  describe 'DELETE /store/:id' do
     it 'deletes store' do
       store = StoreFactory.create_stores(1).first
       
