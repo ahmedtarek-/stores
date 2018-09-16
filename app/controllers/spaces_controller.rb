@@ -26,6 +26,14 @@ class SpacesController < ApplicationController
     end
   end
 
+  def destroy
+    if @space.delete
+      render :show, status: :ok
+    else
+      render json: { errors: { space: @space.errors }}, status: :unprocessable_entity
+    end
+  end
+
 
   
   private
@@ -35,7 +43,7 @@ class SpacesController < ApplicationController
   end
 
   def set_space
-  	@space = Space.find(params[:id])
+    @space = Space.find(params[:id])
   end
 
   def spaces_params
@@ -43,7 +51,7 @@ class SpacesController < ApplicationController
   end
 
   def space_create_params
-  	params.require(:space).permit(SpacesHelper.valid_params)
+    params.require(:space).permit(SpacesHelper.valid_params)
   end
 
 end

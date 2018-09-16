@@ -65,7 +65,7 @@ RSpec.describe 'Space API' do
     it 'deletes space' do
       space = SpaceFactory.create_spaces(1).first
       
-      expect { delete "/spaces/#{space.id}" }.to change(Store, :count).from(1).to(0)
+      expect { delete "/spaces/#{space.id}" }.to change(Space, :count).from(1).to(0)
     end
   end
 end
