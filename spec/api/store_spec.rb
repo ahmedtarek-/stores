@@ -33,7 +33,7 @@ RSpec.describe 'Store API' do
       
       get ("/stores/#{store_id}")
       json = JSON.parse(response.body)
-      
+
       expect(response).to have_http_status(200)
       expect(json['store']['id']).to eq(store_id)
     end
@@ -47,6 +47,24 @@ RSpec.describe 'Store API' do
         street: "Clockwork 12"
       }
       expect { post '/stores', { store: params } }.to change(Store, :count).from(0).to(1)
+    end
+  end
+
+  describe 'PUT /store' do
+    it 'updates store' do
+      store = StoreFactory.create_stores(1).first
+      
+      params = {
+        title:  "New Store",
+        street: "Clockwork 12"
+      }
+
+      put "/stores/#{store.id}", { store: params }
+      
+      store = Store.find(store.id)
+      params.keys.each do |key|
+        expect(store.attributes[key.to_s]).to eq params[key]
+      end
     end
   end
 end

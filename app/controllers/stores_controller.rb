@@ -1,6 +1,6 @@
 class StoresController < ApplicationController
   before_action :set_stores, only: [:index]
-  before_action :set_store, only: [:show]
+  before_action :set_store, only: [:show, :update]
 
   def index
   end
@@ -12,6 +12,14 @@ class StoresController < ApplicationController
     @store = Store.new(store_create_params)
 
     if @store.save
+      render :show, status: :ok
+    else
+      render json: { errors: { store: @store.errors }}, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @store.update(store_create_params)
       render :show, status: :ok
     else
       render json: { errors: { store: @store.errors }}, status: :unprocessable_entity
