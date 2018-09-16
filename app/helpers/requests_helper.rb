@@ -18,7 +18,7 @@ module RequestsHelper
       conditions << sql_mapping_for(field, value.split(DEFAULT_SEPARATOR)[0])
       values << value.split(DEFAULT_SEPARATOR)[1]
     end
-    puts "#{[conditions.join(" #{SQL_AND_OPERATOR} "), *values]}"
+
     [conditions.join(" #{SQL_AND_OPERATOR} "), *values]
   end
 
