@@ -15,6 +15,9 @@ class SpacesController < ApplicationController
     @spaces = Space.all
   end
 
+  def set_space
+  	@space = Space.find(params[:id])
+  end
 
   def spaces_params
     params.permit(SpacesHelper.valid_params)
