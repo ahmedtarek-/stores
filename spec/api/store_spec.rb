@@ -27,6 +27,18 @@ RSpec.describe 'Store API' do
     end
   end
 
+  describe 'GET /store' do
+    it 'returns correct store' do
+      store_id = StoreFactory.create_stores(1).first.id
+      
+      get ("/stores/#{store_id}")
+      json = JSON.parse(response.body)
+      
+      expect(response).to have_http_status(200)
+      expect(json['store']['id']).to eq(store_id)
+    end
+  end
+
   describe 'POST /stores' do
     it 'creates new stores - when given valid params' do
       params = {

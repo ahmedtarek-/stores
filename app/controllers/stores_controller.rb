@@ -1,5 +1,6 @@
 class StoresController < ApplicationController
   before_action :set_stores, only: [:index]
+  before_action :set_store, only: [:show]
 
   def index
   end
@@ -22,6 +23,10 @@ class StoresController < ApplicationController
   def set_stores
     @stores = stores_params.present? ?
                 Store.where(RequestsHelper.conditions_from_params(stores_params)) : Store.all
+  end
+
+  def set_store
+    @store = Store.find(params[:id])
   end
 
   def stores_params
