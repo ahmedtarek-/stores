@@ -1,6 +1,6 @@
 class StoresController < ApplicationController
   before_action :set_stores, only: [:index]
-  before_action :set_store, only: [:show, :update]
+  before_action :set_store, only: [:show, :update, :destroy]
 
   def index
   end
@@ -20,6 +20,14 @@ class StoresController < ApplicationController
 
   def update
     if @store.update(store_create_params)
+      render :show, status: :ok
+    else
+      render json: { errors: { store: @store.errors }}, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @store.delete
       render :show, status: :ok
     else
       render json: { errors: { store: @store.errors }}, status: :unprocessable_entity

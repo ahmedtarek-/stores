@@ -71,8 +71,6 @@ RSpec.describe 'Store API' do
   describe 'DELETE /store' do
     it 'deletes store' do
       store = StoreFactory.create_stores(1).first
-
-      delete "/stores/#{store.id}"
       
       expect { delete "/stores/#{store.id}" }.to change(Store, :count).from(1).to(0)
     end
