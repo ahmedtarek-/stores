@@ -41,11 +41,11 @@ RSpec.describe 'Space API' do
       # 1 month, 2 weeks and 4 days
       start_date = Time.now
       end_date = start_date + 48.days
-      expected_price = 2400
+      expected_price = 2400.0
 
       get "/spaces/#{space.id}/price/#{start_date.to_i}/#{end_date.to_i}"
       json = JSON.parse(response.body)
-      expect (json['price']).to eq(expected_price)
+      expect(json['price']).to eq(expected_price)
     end
   end
 
