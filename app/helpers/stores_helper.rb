@@ -7,4 +7,11 @@ module StoresHelper
       :spaces_count
     ]
   end
+
+  def self.valid_create_params
+  	valid_params -
+    [
+      :spaces_count
+    ]
+  end
 end

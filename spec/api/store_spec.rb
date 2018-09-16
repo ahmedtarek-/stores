@@ -28,13 +28,13 @@ RSpec.describe 'Store API' do
   end
 
   describe 'POST /stores' do
-    it 'creates new stores' do
+    it 'creates new stores - when given valid params' do
       params = {
         title: "New Store",
         city: "New Delhi",
         street: "Clockwork 12"
       }
-      expect { post '/stores', { store: params } }.to change(Store, :count).by(1)
+      expect { post '/stores', { store: params } }.to change(Store, :count).from(0).to(1)
     end
   end
 end
