@@ -1,11 +1,21 @@
 class SpacesController < ApplicationController
   before_action :set_spaces, only: [:index]
-  before_action :set_space, only: [:show, :update, :destroy]
+  before_action :set_space, only: [:show, :update, :destroy, :price]
 
   def index
   end
 
   def show
+  end
+
+  def price
+    @space_price = @space.calculate_price(params[:start_date], params[:end_date])
+
+    if @space_price.present?
+      render :price, status: :ok
+    else
+      render json: { errors: { price: "Incorrect Format" }}, status: :unprocessable_entity
+    end
   end
 
   def create
