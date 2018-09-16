@@ -5,7 +5,8 @@ module SpacesHelper
       :size,
       :price_per_day,
       :price_per_week,
-      :price_per_month
+      :price_per_month,
+      :store_id
     ]
   end
 end
