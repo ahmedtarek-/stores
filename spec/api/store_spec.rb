@@ -22,7 +22,7 @@ RSpec.describe 'Store API' do
       get '/stores', { title: "eq:Yamaha" }
       stores_ids = JSON.parse(response.body)['stores'].map { |s| s['id'] }
 
-      expect(stores_ids.size).to eq(1)
+      expect(stores_ids.size).to eq(matching_stores_ids.size)
       expect(stores_ids).to eq(matching_stores_ids)
     end
 

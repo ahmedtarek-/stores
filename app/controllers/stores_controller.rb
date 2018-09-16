@@ -7,6 +7,11 @@ class StoresController < ApplicationController
   private
 
   def set_stores
-    @stores = Store.all
+    @stores = stores_params.present? ?
+                Store.where(RequestsHelper.conditions_from_params(stores_params)) : Store.all
+  end
+
+  def stores_params
+    params.permit(StoresHelper.valid_params)
   end
 end
