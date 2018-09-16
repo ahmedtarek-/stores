@@ -8,6 +8,17 @@ class SpacesController < ApplicationController
   def show
   end
 
+  def create
+    @space = Space.new(space_create_params)
+
+    if @space.save
+      render :show, status: :ok
+    else
+      render json: { errors: { store: @space.errors }}, status: :unprocessable_entity
+    end
+  end
+
+
   
   private
 
@@ -21,6 +32,10 @@ class SpacesController < ApplicationController
 
   def spaces_params
     params.permit(SpacesHelper.valid_params)
+  end
+
+  def space_create_params
+  	params.require(:space).permit(SpacesHelper.valid_params)
   end
 
 end
